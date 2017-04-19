@@ -9,53 +9,63 @@ app.get('/', function (req, res) {
 app.use('/client', express.static(__dirname + '/client'));
 server.listen(1337);
 
-//create a list of players
-//limit them to two.
 var SOCKET_LIST = {};
-var PLAYER_LIST = {};
+var players = [];
+var NUMBER_LIST = [];
 
-var Player = function (id) {
-    var self = {
-        id: id,
-        number: "" + Math.floor(10 * Math.random()),
-        numbers: []
-    }
-}
 var io = require('socket.io')(server, {});
 io.sockets.on('connection', function (socket) {
     //assign id to each socket
     socket.id = Math.random();
-    socket.currentNumber;
     SOCKET_LIST[socket.id] = socket;
-    var player = Player(socket.id);
-    PLAYER_LIST[socket.it] = player;
+    players.push(socket.id);
+
+    socket.on('startGame', function (data) {
+        console.log('SOCKET ID', socket.id);
+        console.log('PLAYER NUMBER', Object.keys(SOCKET_LIST)[0])
+        console.log(Object.keys(SOCKET_LIST).length);
+        if (players.length === 1) {
+            socket.emit('info', {
+                msg: 'Hello - lets wait for a second gamer',
+                numberList: NUMBER_LIST
+            })
+        }
+        else if (players.length === 2) {
+            var randomNumber = Math.floor(Math.random() * (21 - 2 + 1)) + 2;
+            NUMBER_LIST.push(randomNumber);
+            socket.emit('info', {
+                msg: 'Hello - you start',
+                numberList: NUMBER_LIST
+            })
+        } else {
+            socket.emit('info', {
+                msg: 'Sorry there are already two guys playing...you can watch',
+                numberList: NUMBER_LIST
+            })
+        }
+    });
 
     socket.on('disconnect', function () {
         delete SOCKET_LIST[socket.id];
-        delete PLAYER_LIST[socket.id];
-    })
-
-    socket.on('startGame', function (data) {
-        console.log(data.number);
-        socket.currentNumber = data.number;
-        console.log('SOCKET ID', socket.id);
-        console.log('CURRENT NUMBER', socket.currentNumber);
-        socket.currentNumber = socket.currentNumber / 3;
     });
 
-    socket.emit('updateNumbers', {
-        numbers: 'number'
-    });
-
-    socket.on('newNumber', function (data) {
-        console.log(data.newNumber);
-        number = number / 3;
-        console.log('new number', number);
-        for (var j in SOCKET_LIST) {
-            var socket = SOCKET_LIST[j];
-            socket.emit('updateNumbers', {
-                numbers: number
-            });
+    socket.on('calc', function (data) {
+        console.log(NUMBER_LIST[NUMBER_LIST.length - 1])
+        newNumber = (NUMBER_LIST[NUMBER_LIST.length - 1]) + data.modifier / 3
+        if (newNumber != 1) {
+            NUMBER_LIST.push(data.modifier);
+            NUMBER_LIST.push(newNumber);
+            socket.emit('updateNumberList', {
+                msg: 'go on',
+                numberList: NUMBER_LIST
+            })
+        } else {
+            socket.emit('updateNumberList', {
+                msg: 'YOU ARE A WINNER',
+                numberList: NUMBER_LIST
+            })
         }
     });
+
 });
+

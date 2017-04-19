@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +7,51 @@
 </head>
 
 <body>
-    <button onclick="startGame()">start game</button>
+    <button onclick="startGame()">I want to play</button>
+    <div id="info-msg"></div>
+
+    <select name="modifier" onchange="calc(this.value)">
+        <option value="0">SELECT<option>
+        <option value='-1'>-1<option>
+        <option value='0'>0</option>
+        <option value='1'>1</option>
+    </select>
+
+    <div id="number-list"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <script>
         var socket = io();
-
-        var randomNumber = Math.random();
-
         var startGame = function () {
             socket.emit('startGame', {
-                number: randomNumber
             });
         }
 
-        socket.on('updateNumbers', function (data) {
-            console.log(data.numbers);
+        var calc = function (modifier) {
+            socket.emit('calc', {
+                modifier: modifier
+            });
+        }
+
+        socket.on('updateNumberList', function (data) {
+            var div = document.getElementById("number-list");
+
+            data.numberList.forEach(function (value) {
+                console.log(value);
+                var newValue = document.createElement('p');
+                newValue.innerHTML = value;
+                div.appendChild(newValue);
+            });
         });
 
-        socket.on('serverMsg', function (data) {
-            console.log(data.msg);
+        socket.on('info', function (data) {
+            document.getElementById('info-msg').innerHTML = data.msg;
+            var div = document.getElementById("number-list");
+
+            data.numberList.forEach(function (value) {
+                var content = document.createTextNode(value);
+                div.appendChild(content);
+            });
         });
     </script>
 </body>
