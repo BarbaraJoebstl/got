@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#info-box{
+    font-size: 2em;
+    border: 1px solid red;
+}
+
+#playground{
+            width: 95%;
+            max-width: 400px;
+            height: 350px;
+            overflow-y: scroll;
+            border: 1p solid green;   
+        }
+
+.number {
+            margin: 20px;
+            padding: 5px;
+            border: 1px solid grey;            
+
+}

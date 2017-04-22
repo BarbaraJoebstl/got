@@ -1,15 +1,19 @@
 {
-  "name": "game_of_three",
+  "name": "got",
   "version": "1.0.0",
-  "description": "A game for two independent players using an API to communicate",
-  "main": "app.js",
+  "description": "a game for two independent players",
+  "main": "index.js",
   "scripts": {
+    "start": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-   "dependencies": {
-      "express": "4.15.2",
-      "socket.io": "1.0.0"
+  "author": "Barbara Joebstl",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
   },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
