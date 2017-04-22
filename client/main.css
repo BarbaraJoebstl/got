@@ -1,25 +1,98 @@
+body {
+    font-family: 'Pacifico', cursive;
+}
+
+h1 {
+    text-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    color: #A2E891;
+}
+
 .container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-content: center;
 }
 
 #info-box{
+    text-align: center;
     font-size: 2em;
-    border: 1px solid red;
+    color: #99948E;
+    padding-bottom: 1em;
 }
 
-#playground{
-            width: 95%;
-            max-width: 400px;
-            height: 350px;
-            overflow-y: scroll;
-            border: 1p solid green;   
-        }
+.playground-container {
+    height: 60%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
 
-.number {
-            margin: 20px;
-            padding: 5px;
-            border: 1px solid grey;            
+.playground-container > div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 5em;
+    color: lightgrey;
+}
 
+#playground, .playground-container > div > div {
+    font-family: pacifico, cursive; 
+}
+
+#playground:first-child>div>div {
+    height: 50px;
+    width: 50px;
+    box-shadow: -1px -1px 67px 9px rgba(230,218,230,1);
+    border-radius: 50px;
+    color: #99948E;
+}
+
+#playground:nth-child()>div>div {
+    height: 50px;
+    width: 50px;
+    box-shadow: -1px -1px 67px 9px rgba(230,218,230,1);
+    border-radius: 50px;
+    color: #99948E;
+}
+
+#playground:nth-child(3)>div>div {
+    height: 50px;
+    width: 50px;
+    box-shadow: -1px -1px 67px 9px rgba(225,250,247,1);
+    border-radius: 50px;
+    color: #99948E;
+}
+
+button {
+    font-family: pacifico, cursive; 
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    font-size: 32px;
+    border: none;
+    box-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+   -webkit-font-smoothing: antialiased;
+    transition: 0.3s box-shadow ease-in-out;
+    white-space: nowrap;
+    background: #A2E891;
+}
+
+button:hover {
+    background: #FFEDAE; 
+    box-shadow: 20px 15px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    background: lightgrey;
+    cursor: none;
+    box-shadow: none;
 }

@@ -1,26 +1,41 @@
 <!DOCTYPE HTML>
 <html> 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" href="favicon.ico" type="image/favicon" />
         <link rel="stylesheet" href="main.css">
-    <link href="https://fonts.googleapis.com/css?family=Petit+Formal+Script" rel="stylesheet">
-    <title>Game of Three</title>
-</head>
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <title>Game of Three</title>
+    </head>
     <body>
         <div class="container">
+            <h1>Game of Three</h1>
             <div id="info-box"></div>
-            <div id="playground"></div>
-            <form id="move">
-                <input onclick="nextMove()" id="submit-operator" value="NEXT MOVE"/>
-            </form> 
-            <select name="operator-list" form="move" id="operator-list">
-                <option value='-1'>-1<option>
-                <option value='0'>0</option>
-                <option value='1'>1</option>
-            </select>
-        </div>
+            <div class="playground-container">
+                <div>Player A</div>
+                <div>operator</div>
+                <div>player b</div>
+            </div>
+            <hr>
+            <div id="playground" class="playground-container">
+                <div id="container-a"></div>
+                <div id="container-operator"></div>
+                <div id="container-b"></div>
+            </div>
+            <hr>
+            <div class="playground-container">
+                <div>
+                    <button onclick="nextMove(-1)">-1</button>
+                </div>
+                <div>
+                    <button onclick="nextMove(0)">0</button>
+                </div>
+                <div>
+                    <button onclick="nextMove(1)">+1</button>
+                </div>
+            </div>
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
         <script src="main.js"></script>
     </body>

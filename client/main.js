@@ -10,35 +10,48 @@ socket.on('info', function(data) {
 });
 
 function render(data){
+    var elems = document.getElementsByTagName('button');
+    var len = elems.length;
+
+    if(data.isPlaying && data.isPlaying != socket.id) { 
+for (var i = 0; i < len; i++) {
+    elems[i].disabled = true;
+}   
+ } else {
+for (var i = 0; i < len; i++) {
+    elems[i].disabled = false;
+}      }
+
+    if (data.playerB.numbers && data.playerA.numbers && data.operators){
     
-    if(data.numbers) {
-  toggleButton = document.getElementById("submit-operator");
-    if(data.isPlaying && data.isPlaying === socket.id) { 
-        toggleButton.disabled = false;
-    } else {
-        toggleButton.disabled = true;
-    }
-
-
-    var move = data.numbers.map(function(number, index){
-        return(`
-            <div class="number">
-                <div>${number}</div>
-            </div>
-        `)
+    var playerA = data.playerA.numbers.map(function(numberA, index){
+           return(`<div><div>${numberA}</div></div>`)
     }).join(' ');
 
+    var operator_ = data.operators.map(function(operator, index){
+        return(`<div><div>${operator}</div></div>`)
+    }).join(' ');
+
+   var playerB = data.playerB.numbers.map(function(numberB, index){
+           return(`<div><div>${numberB}</div></div>`)
+    }).join(' ');
+
+    var div_playerA = document.getElementById('container-a');
+    div_playerA.innerHTML = playerA;
+
+    var div_operators = document.getElementById('container-operator');
+    div_operators.innerHTML = operator_;
+
+    var div_playerB = document.getElementById('container-b');
+    div_playerB.innerHTML = playerB;
+
     var div_play = document.getElementById('playground');
-    div_play.innerHTML = move;
     div_play.scrollTop = div_play.scrollHeight; 
-}
+    }
  }
 
-function nextMove(){
-    var e = document.getElementById("operator-list");
-    var data = e.options[e.selectedIndex].value;
-
-    socket.emit('next-move', data);
+function nextMove(operator){
+    socket.emit('next-move', operator);
 }
 
 function renderInfo(data){
