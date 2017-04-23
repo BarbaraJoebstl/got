@@ -4,19 +4,26 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="icon" href="favicon.ico" type="image/favicon" />
         <link rel="stylesheet" href="main.css">
         <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <title>Game of Three</title>
     </head>
     <body>
         <div class="container">
-            <h1>Game of Three</h1>
-            <div id="info-box"></div>
             <div class="playground-container">
-                <div>Player A</div>
+                <h1>Game of Three </h1>
+                <h2 id="info-box"></h2>                
+                <h3 onclick="toggleAudio()">
+                    toggle audio
+                    <audio autoplay loop="loop" id="sound">
+                        <source src="got.mp3" type="audio/mpeg">
+                    </audio>
+                </h3>
+            </div>    
+            <div class="playground-container">
+                <div id="player-a">Player A</div>
                 <div>operator</div>
-                <div>player b</div>
+                <div id="player-b">player b</div>
             </div>
             <hr>
             <div id="playground" class="playground-container">
@@ -25,17 +32,12 @@
                 <div id="container-b"></div>
             </div>
             <hr>
-            <div class="playground-container">
-                <div>
+            <div class="button-container">
                     <button onclick="nextMove(-1)">-1</button>
-                </div>
-                <div>
                     <button onclick="nextMove(0)">0</button>
-                </div>
-                <div>
-                    <button onclick="nextMove(1)">+1</button>
-                </div>
+                    <button onclick="nextMove(1)">+1</button>   
             </div>
+         </div>   
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
         <script src="main.js"></script>
     </body>
