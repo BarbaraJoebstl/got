@@ -9,13 +9,14 @@ On init a game object is created. A game object consists of two players, an oper
 This design is chosen in order to enable multiple games later on.
 
 ### Sketch
-
+![got_sketch](https://cloud.githubusercontent.com/assets/6280553/25315580/958479c2-2857-11e7-80de-f372bb2e3bd1.jpg)
 
 ### Features
 - **Notification Area.** The web interface has a notifiaction area on top, to inform the player who is on the move. 
-- **First player.**: A player can start the game even if there is no second player (yet) connected.
-- **Operators.**: The operator buttons are disabled, if the the player is not on the move.
-- **Third player.**: If a third player connects, an info message is displayed and the third player can watch the game. Audio is also provided and the players can pause the music.
+- **First player.** A player can start the game even if there is no second player (yet) connected.
+- **Operators.** The operator buttons are disabled, if the the player is not on the move.
+- **Third player.** If a third player connects, an info message is displayed and the third player can watch the game. 
+- **Audio.**  Music provided and the players can pause the music.
 - **Responsive Design.**
 
 ### Run app in dev mode
